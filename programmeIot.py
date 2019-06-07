@@ -4,11 +4,11 @@ import mysql.connector as mariadb
 
 import pigpio
 import DHT22
-#import RPi.GPIO as GPIO
 from gpiozero import LightSensor
-from time import sleep
+from time import sleep, strftime
 import decimal
 import os
+from datetime import datetime
 
 # partie connection bdd
 mariadb_connection = mariadb.connect(user='pi', password='root', database='projet_plante_co')
@@ -38,7 +38,12 @@ def readDHT22():
 
 #afficher les données
 
+
 while True:
+
+    date = datetime.now()
+    date_format_sql = date.strftime("%Y-%m-%d %H:%M:%S")
+
     humidity, temperature = readDHT22()
     print("Humidity is: " + humidity + "%")
     print("Temperature is: " + temperature + "°C")
@@ -47,6 +52,6 @@ while True:
     else:
         print("Light: " + str(valeur_lumiere) + ' %')
 
-    cursor.execute("INSERT INTO data_capter(data_capter_luminosity, data_capter_temp, data_capter_humidity) VALUES(" + str(valeur_lumiere) + "," + str(temperature) + "," + str(humidity) + ")")
+    cursor.execute("INSERT INTO data_capter(data_capter_date ,data_capter_luminosity, data_capter_temp, data_capter_humidity) VALUES( '" + date_format_sql + "', " + str(valeur_lumiere) + "," + str(temperature) + "," + str(humidity) + ")")
     mariadb_connection.commit()
     sleep(1.5)

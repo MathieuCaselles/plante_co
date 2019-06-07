@@ -15,7 +15,7 @@ user_catégorie varchar(50));
 
 create table data_capter
 (data_capter_id int not null primary key AUTO_INCREMENT,
-data_capter_date datetime,
+data_capter_date varchar(50),
 data_capter_luminosity float,
 data_capter_temp float,
 data_capter_humidity float);
