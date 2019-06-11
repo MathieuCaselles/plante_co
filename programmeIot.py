@@ -11,7 +11,7 @@ import os
 from datetime import datetime
 
 # partie connection bdd
-mariadb_connection = mariadb.connect(user='pi', password='root', database='projet_plante_co')
+mariadb_connection = mariadb.connect(user='pi', password='root', host='192.168.43.36', database='projet_plante_co')
 cursor = mariadb_connection.cursor()
 
 # partie luminosité
@@ -51,6 +51,5 @@ while True:
     else:
         print("Light: " + str(valeur_lumiere) + ' %')
 
-    cursor.execute("INSERT INTO data_capter(data_capter_date ,data_capter_luminosity, data_capter_temp, data_capter_humidity) VALUES( '" + date_format_sql + "', " + str(valeur_lumiere) + "," + str(temperature) + "," + str(humidity) + ")")
-    mariadb_connection.commit()
-    sleep(1.5)
+    cursor.execute("INSERT INTO data_capter(data_capter_date ,data_capter_luminosity, data_capter_temp, data_capter_hu$    mariadb_connection.commit()
+    sleep(10)
