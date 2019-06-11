@@ -17,9 +17,6 @@ cursor = mariadb_connection.cursor()
 # partie luminosité
 
 detecter_lumiere = LightSensor(26)
-valeur_lumiere = round(detecter_lumiere.value*100, 1)
-
-
 
 # partie humidité et température
 
@@ -40,6 +37,8 @@ def readDHT22():
 
 
 while True:
+
+    valeur_lumiere = round(detecter_lumiere.value*100, 1)
 
     date = datetime.now()
     date_format_sql = date.strftime("%Y-%m-%d %H:%M:%S")
